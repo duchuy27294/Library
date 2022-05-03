@@ -1,4 +1,4 @@
-from CustomSignal.Event import Event
+from Event import Event
 from Signal.Signal import Signal
 from typing import List
 
