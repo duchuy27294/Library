@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from NetzteilStatus.NetzteilStatus import NetzteilStatus
+from Status.Status import Status
 from Instrument.Instrument import Instrument
 
 class Netzteil(Instrument):
@@ -31,33 +31,9 @@ class Netzteil(Instrument):
         pass
     
     @abstractmethod
-    def set_status(self,status:NetzteilStatus):
+    def set_status(self,status:Status):
         pass
 
     @abstractmethod
-    def get_status(self)->NetzteilStatus:
-        pass
-
-    @abstractmethod
-    def turnOn(self):
-        pass
-
-    @abstractmethod
-    def turnOff(self):
-        pass
-
-    @abstractmethod
-    def connect(self):
-        pass
-
-    @abstractmethod
-    def disconnect(self):
-        pass
-
-    @abstractmethod
-    def save(self):
-        pass
-
-    @abstractmethod
-    def resume(self):
+    def get_status(self)->Status:
         pass

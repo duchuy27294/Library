@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from NetzteilStatus.NetzteilStatus import NetzteilStatus
+from NetzteilStatus import NetzteilStatus
 from Instrument.Instrument import Instrument
 
 class Netzteil(Instrument):
