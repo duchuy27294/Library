@@ -1,26 +1,22 @@
-from ERA_Rezipient.ERA_Rezipient_Interface import ERA_Rezipient_Interface
-from Netzteil.DummyNetzteil import DummyNetzteil
-from Netzteil.DummyNetzteil import Tdk
-from Netzteil.DummyNetzteil import Syskon
+try:
+    from .ERA_Rezipient_Interface import ERA_Rezipient_Interface
+except (ModuleNotFoundError,ImportError):
+    from ERA_Rezipient_Interface import ERA_Rezipient_Interface
+from Lib.Netzteil.DummyNetzteil import DummyNetzteil
+from Lib.Netzteil.DummyNetzteil import Tdk
+from Lib.Netzteil.DummyNetzteil import Syskon
 from typing import List
 import csv
 import os
 
 class Dummy_ERA_Rezipient(ERA_Rezipient_Interface):
-    count:int = 0
-
     def __init__(self,name = 'Rezipient'):
         self.__name = name
         self.__netzteil:List[DummyNetzteil] = []
         self.__id:List[int] = []
         self.__path = os.getcwd() + '\\' + self.__name + '.csv'
-        Dummy_ERA_Rezipient.count += 1
 
-    @classmethod
-    def getCount(cls):
-        return Dummy_ERA_Rezipient.count
-
-    def size(self):
+    def count(self):
         return len(self.__netzteil)
 
     def getName(self):

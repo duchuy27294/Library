@@ -60,3 +60,47 @@ class DCNetzteilInterface(Netzteil):
     @abstractmethod
     def pause(self):
         pass
+
+    @abstractmethod
+    def isOn(self):
+        pass
+
+    @abstractmethod
+    def isOff(self):
+        pass
+
+    @abstractmethod
+    def isDisconnected(self):
+        pass
+
+    @abstractmethod
+    def isConnected(self):
+        pass
+
+    @abstractmethod
+    def isWorking(self):
+        pass
+
+    @abstractmethod
+    def isPause(self):
+        pass
+
+    @abstractmethod
+    def getOn(self):
+        pass
+
+    @abstractmethod
+    def getOff(self):
+        pass
+
+    @abstractmethod
+    def getDisconnected(self):
+        pass
+    
+    @abstractmethod
+    def getWorking(self):
+        pass
+
+    @abstractmethod
+    def getPause(self):
+        pass

@@ -1,5 +1,8 @@
-from ERA_Rezipient.ERA_Rezipient_Interface import ERA_Rezipient_Interface
-from Netzteil.DCNetzteil import DCNetzteil
+try:
+    from .ERA_Rezipient_Interface import ERA_Rezipient_Interface
+except (ModuleNotFoundError,ImportError):
+    from ERA_Rezipient_Interface import ERA_Rezipient_Interface
+from Lib.Netzteil.DCNetzteil import DCNetzteil
 from typing import List
 
 class ERA_Rezipient(ERA_Rezipient_Interface):

@@ -1,4 +1,4 @@
 ######################################
-from MathSignal.PeriodicSignal.PeriodicSignal import PeriodicSignal
-from MathSignal.PeriodicSignal.Sin import Sin
-from MathSignal.PeriodicSignal.Cos import Cos
+from .PeriodicSignal import PeriodicSignal
+from .Sin import Sin
+from .Cos import Cos

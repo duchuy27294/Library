@@ -1,3 +1,4 @@
 #############################################
-from MathSignal.MathSignal import MathSignal
-from MathSignal.CustomSignal import CustomSignal
+from .MathSignal import MathSignal
+from .CustomSignal import CustomSignal
+from .PeriodicSignal import *

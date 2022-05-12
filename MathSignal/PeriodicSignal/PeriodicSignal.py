@@ -1,6 +1,6 @@
 from abc import abstractmethod
-from MathSignal import MathSignal
-from Event import Event
+from ..MathSignal import MathSignal
+from Lib.Event import Event
 from typing import List
 
 class PeriodicSignal(MathSignal):

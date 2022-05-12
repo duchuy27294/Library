@@ -1,5 +1,5 @@
-from Event import Event
-from MathSignal import MathSignal
+from Lib.Event import Event
+from .MathSignal import MathSignal
 from typing import List
 
 class CustomSignal(MathSignal):
@@ -35,3 +35,9 @@ class CustomSignal(MathSignal):
 
     def generate(self)->List[Event]:
         return self.__event
+
+    def isEmpty(self):
+        if self.__event:
+            return False
+        else:
+            return True

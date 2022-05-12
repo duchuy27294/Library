@@ -16,7 +16,12 @@ class DummyNetzteil(DCNetzteilInterface):
         self.__name:str = name
         self.__voltage:float = 0
         self.__current:float = 0
-        self.__status = Off(self)
+        self.__on = On(self)
+        self.__off = Off(self)
+        self.__disconnected = Disconnected(self)
+        self.__working = Working(self)
+        self.__pause = Pause(self) 
+        self.__status = self.__off
         self.__tolerance_voltage = tolerance_voltage
         #echter Voltage-wert = self.__voltage - self.__tolerance_voltage
         self.__tolerance_current = tolerance_current
@@ -35,12 +40,12 @@ class DummyNetzteil(DCNetzteilInterface):
         return self.__current
 
     def set_voltage(self,value:float):
-        if (self.__status.__class__.__name__ != 'Off') and (self.__status.__class__.__name__ != 'Disconnected') and (self.__status.__class__.__name__ != 'Pause'):
+        if (not self.isOff()) and (not self.isDisconnected()) and (not self.isPause()):
             if (value <= self.get_max_voltage()) and (value >= 0):
                 self.__voltage = value
 
     def set_current(self,value:float):
-        if (self.__status.__class__.__name__ != 'Off') and (self.__status.__class__.__name__ != 'Disconnected') and (self.__status.__class__.__name__ != 'Pause'):
+        if (not self.isOff()) and (not self.isDisconnected()) and (not self.isPause()):
             if (value <= self.get_max_current()) and (value >= 0):
                 self.__current = value
 
@@ -87,8 +92,10 @@ class DummyNetzteil(DCNetzteilInterface):
         return self.measure_voltage()*self.measure_current()
     
     def set_status(self,status:DCNetzteilStatus):
-        if (status.__class__.__name__ != self.__status.__class__.__name__):
-            self.__status = status
+        statusList = [self.__on,self.__off,self.__pause,self.__disconnected,self.__working]
+        if (status in statusList):
+            if (status != self.__status):
+                self.__status = status
 
     def get_status(self)->DCNetzteilStatus:
         return self.__status
@@ -148,7 +155,7 @@ class DummyNetzteil(DCNetzteilInterface):
         self.__status.turnOn()
 
     def turnOff(self):
-        if (self.__status.__class__.__name__ == 'Working'):
+        if (self.isWorking()):
             self.__voltageAutomation.stop()
             self.__currentAutomation.stop()
         self.__status.turnOff()
@@ -174,3 +181,37 @@ class DummyNetzteil(DCNetzteilInterface):
             self.__currentAutomation.stop()
         self.__status.stop()
         
+    def isOn(self):
+        return (self.__status == self.__on)
+
+    def isOff(self):
+        return (self.__status == self.__off)
+
+    def isDisconnected(self):
+        return (self.__status == self.__disconnected)
+
+    def isConnected(self):
+        return (not (self.__status == self.__disconnected))
+
+    def isWorking(self):
+        return (self.__status == self.__working)
+
+    def isPause(self):
+        return (self.__status == self.__pause)
+
+    def getOn(self):
+        return self.__on
+
+    def getOff(self):
+        return self.__off
+
+    def getDisconnected(self):
+        return self.__disconnected
+    
+    def getWorking(self):
+        return self.__working
+
+    def getPause(self):
+        return self.__pause
+
+

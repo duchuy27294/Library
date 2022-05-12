@@ -1,6 +1,6 @@
 from abc import abstractmethod
 from Netzteil.DCNetzteilInterface import DCNetzteilInterface
-from DCNetzteilStatus import *
+from DCNetzteilStatus.DCNetzteilStatus import * 
 from DCNetzteilAutomation.DCNetzteilAutomation import DCNetzteilAutomation
 
 class DCNetzteil(DCNetzteilInterface):
@@ -9,9 +9,14 @@ class DCNetzteil(DCNetzteilInterface):
     def __init__(self,name = 'DCNetzteil', max_voltage = 20.0, max_current = 20.0):
         super().__init__(max_voltage = max_voltage,max_current = max_current)
         self.__name = name 
-        self.__status = Off(self)
         self.__voltageAutomation = DCNetzteilAutomation(netzteil = self,type = 'voltage')
         self.__currentAutomation = DCNetzteilAutomation(netzteil = self,type = 'current')
+        self.__on = On(self)
+        self.__off = Off(self)
+        self.__disconnected = Disconnected(self)
+        self.__working = Working(self)
+        self.__pause = Pause(self) 
+        self.__status = self.__off
         DCNetzteil.count += 1
 
     @classmethod
@@ -85,6 +90,42 @@ class DCNetzteil(DCNetzteilInterface):
     
     @abstractmethod
     def get_instrument(self):
+        pass
+
+    def isOn(self):
+        return (self.__status == self.__on)
+
+    def isOff(self):
+        return (self.__status == self.__off)
+
+    def isDisconnected(self):
+        return (self.__status == self.__disconnected)
+
+    def isConnected(self):
+        return (not (self.__status == self.__disconnected))
+
+    def isWorking(self):
+        return (self.__status == self.__working)
+
+    def isPause(self):
+        return (self.__status == self.__pause)
+
+    def getOn(self):
+        return self.__on
+
+    def getOff(self):
+        return self.__off
+
+    def getDisconnected(self):
+        return self.__disconnected
+    
+    def getWorking(self):
+        return self.__working
+
+    def getPause(self):
+        return self.__pause
+
+    def show(self):
         pass
 
     

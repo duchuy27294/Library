@@ -1,5 +1,5 @@
-from MathSignal.PeriodicSignal import PeriodicSignal
-from Event import Event
+from .PeriodicSignal import PeriodicSignal
+from Lib.Event.Event import Event
 import math
 from typing import List
 
