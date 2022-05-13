@@ -37,6 +37,10 @@ class DCNetzteilStatus(Status):
     @abstractmethod
     def resume(self):
         pass
+
+    @abstractmethod
+    def toString(self):
+        pass
     
 class Disconnected(DCNetzteilStatus):
     def __init__(self,netzteil):
@@ -66,6 +70,9 @@ class Disconnected(DCNetzteilStatus):
 
     def resume(self):
         pass
+
+    def toString(self):
+        return 'Disconnected'
 
 class Off(DCNetzteilStatus):
     def __init__(self,netzteil):
@@ -97,6 +104,9 @@ class Off(DCNetzteilStatus):
 
     def resume(self):
         pass
+
+    def toString(self):
+        return 'Off'
 
 class On(DCNetzteilStatus):
     def __init__(self,netzteil):
@@ -130,6 +140,9 @@ class On(DCNetzteilStatus):
     def resume(self):
         pass
 
+    def toString(self):
+        return 'On'
+
 class Pause(DCNetzteilStatus):
     def __init__(self,netzteil):
         super().__init__(netzteil)
@@ -162,6 +175,9 @@ class Pause(DCNetzteilStatus):
         working = self._netzteil.getWorking()
         self._netzteil.set_status(working)  #state changed
 
+    def toString(self):
+        return 'Pause'
+
 class Working(DCNetzteilStatus):
     def __init__(self,netzteil):
         super().__init__(netzteil = netzteil)
@@ -193,4 +209,7 @@ class Working(DCNetzteilStatus):
 
     def resume(self):
         pass
+
+    def toString(self):
+        return 'Working'
 

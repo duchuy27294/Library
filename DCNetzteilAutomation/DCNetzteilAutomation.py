@@ -40,30 +40,33 @@ class DCNetzteilAutomation(Automation):
         return self.__netzteil
 
     def do(self):
-        if self.__type == 'voltage':
+        if self.__type.lower() == 'voltage':
             self.__netzteil.set_voltage(self.__event[self.__currentIndex].getValue())
+            print('Voltage = ' + str(self.__netzteil.get_voltage()))
         else:
             self.__netzteil.set_current(self.__event[self.__currentIndex].getValue())
+            print('Current = ' + str(self.__netzteil.get_current()))
         self.__currentIndex += 1
         if self.__currentIndex >= len(self.__event):
             self.__currentIndex = 0
             self.stop()
 
     def run(self):
-        if self.__timer:
-            self.__timer.clear()
-        startTimer = 0
-        self.generate()
-        self.__currentIndex = 0
-        if self.__event:
-            for i in range (0,len(self.__event),1):
-                newTimer = Timer(startTimer,self.do)
-                startTimer += self.__event[i].getDuration()
-                self.__timer.append(newTimer)
-        self.__start = time.time()
-        if self.__timer:
-            for t in self.__timer:
-                t.start()
+        if self.__signal is not None:
+            if self.__timer:
+                self.__timer.clear()
+            startTimer = 0.1
+            self.generate()
+            self.__currentIndex = 0
+            if self.__event:
+                for i in range (0,len(self.__event),1):
+                    newTimer = Timer(startTimer,self.do)
+                    startTimer += self.__event[i].getDuration()
+                    self.__timer.append(newTimer)
+            self.__start = time.time()
+            if self.__timer:
+                for t in self.__timer:
+                    t.start()
 
     def pause(self):
         for timer in self.__timer:
@@ -89,10 +92,14 @@ class DCNetzteilAutomation(Automation):
             for timer in self.__timer:
                 timer.start()
 
-    def stop(self):
+    def cancel(self):
         if self.__timer:
             for timer in self.__timer:
                 timer.cancel()
+        self.stop()
+
+    def stop(self):
         self.__start = time.time()
         self.__save = None
         self.__currentIndex = 0
+        #self.__netzteil.set_status(self.__netzteil.getOn())

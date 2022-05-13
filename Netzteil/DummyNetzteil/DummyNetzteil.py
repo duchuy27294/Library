@@ -3,6 +3,8 @@ from threading import Timer
 from Lib.DCNetzteilStatus import *
 from Lib.DCNetzteilAutomation.DCNetzteilAutomation import DCNetzteilAutomation
 from Lib.MathSignal.MathSignal import MathSignal
+from threading import Timer
+import time
 
 class DummyNetzteil(DCNetzteilInterface):
     count:int = 0
@@ -134,15 +136,17 @@ class DummyNetzteil(DCNetzteilInterface):
         if maxDuration < self.getCurrentAutomation().getDuration():
             maxDuration = self.getCurrentAutomation().getDuration()
         return maxDuration
-    
-    def endAutomation(self):
-        self.stop(self)
 
     def run(self):
         self.__status.run()
-        if self.isWorking:
+        if self.isWorking():
+            duration = self.__voltageAutomation.getSignal().getDuration()
+            if (self.__currentAutomation.getSignal().getDuration() > duration):
+                duration = self.__currentAutomation.getSignal().getDuration()
+            endTimer = Timer(duration,self.stop)
             self.__voltageAutomation.run()
             self.__currentAutomation.run()
+            endTimer.start()
 
     def pause(self):
         if self.isWorking():

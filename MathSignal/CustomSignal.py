@@ -3,7 +3,13 @@ from .MathSignal import MathSignal
 from typing import List
 
 class CustomSignal(MathSignal):
-    def __init__(self,eventList:List[Event] = []):
+    def __init__(self,eventList = None):
+        if eventList is None:
+            self.__event = []
+        else:
+            self.__event = eventList
+
+    def setEventList(self,eventList):
         self.__event = eventList
 
     def count(self):
@@ -34,10 +40,10 @@ class CustomSignal(MathSignal):
         self.__event.pop()
 
     def generate(self)->List[Event]:
-        return self.__event
+        return self.__event.copy()
 
     def isEmpty(self):
-        if self.__event:
-            return False
-        else:
+        if len(self.__event) == 0:
             return True
+        else:
+            return False
