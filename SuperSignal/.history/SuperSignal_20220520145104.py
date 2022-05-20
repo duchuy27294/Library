@@ -1,5 +1,5 @@
 try:
-    from .MathSignal import *
+    from ..MathSignal import *
 except (ModuleNotFoundError,ImportError):
     from MathSignal import *
 from typing import List

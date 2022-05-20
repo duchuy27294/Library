@@ -42,10 +42,8 @@ class DCNetzteilAutomation(Automation):
     def do(self):
         if self.__type.lower() == 'voltage':
             self.__netzteil.set_voltage(self.__event[self.__currentIndex].getValue())
-            print('Voltage = ' + str(self.__netzteil.get_voltage()))
         else:
             self.__netzteil.set_current(self.__event[self.__currentIndex].getValue())
-            print('Current = ' + str(self.__netzteil.get_current()))
         self.__currentIndex += 1
         if self.__currentIndex >= len(self.__event):
             self.__currentIndex = 0

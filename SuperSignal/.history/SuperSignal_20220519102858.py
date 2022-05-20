@@ -1,7 +1,4 @@
-try:
-    from .MathSignal import *
-except (ModuleNotFoundError,ImportError):
-    from MathSignal import *
+from MathSignal import *
 from typing import List
 
 class SignalAlreadyExist(Exception):
@@ -26,12 +23,12 @@ class SuperSignal(MathSignal):
             raise InvalidTime
         else:
             if (time > self.getDuration()):
-                raise TimeGreaterThanDuration(time,self.getDuration())
+                raise TimeGreaterThanDuration
             else:
                 duration = 0
                 for sig in self.__signal:
                     if (time >= duration) and (time < (duration + sig.getDuration())):
-                        return sig.getValue(time - duration)
+                        return sig.getValue()
                     else:
                         duration += sig.getDuration()
                 return None
@@ -53,18 +50,3 @@ class SuperSignal(MathSignal):
             self.__signal.append(signal)
         else:
             raise SignalAlreadyExist
-
-    def remove(self,signal:MathSignal):
-        if signal in self.__signal:
-            self.__signal.remove(signal)
-        else:
-            raise SignalNotExist
-
-    def getSignalList(self):
-        return self.__signal
-
-    def isEmpty(self):
-        if (len(self.__signal) == 0):
-            return True
-        else:
-            return False

@@ -26,12 +26,12 @@ class SuperSignal(MathSignal):
             raise InvalidTime
         else:
             if (time > self.getDuration()):
-                raise TimeGreaterThanDuration(time,self.getDuration())
+                raise TimeGreaterThanDuration
             else:
                 duration = 0
                 for sig in self.__signal:
                     if (time >= duration) and (time < (duration + sig.getDuration())):
-                        return sig.getValue(time - duration)
+                        return sig.getValue()
                     else:
                         duration += sig.getDuration()
                 return None
