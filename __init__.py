@@ -9,6 +9,7 @@ try:
     from .Netzteil import *
     from .Rezipient import *
     from .Status import *
+    from .SuperSignal import *
 except (ModuleNotFoundError,ImportError):
     from Automation import *
     from DCNetzteilAutomation import *
@@ -20,3 +21,4 @@ except (ModuleNotFoundError,ImportError):
     from Netzteil import *
     from Rezipient import *
     from Status import *
+    from SuperSignal import *
