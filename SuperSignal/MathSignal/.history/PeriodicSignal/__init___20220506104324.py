@@ -1,2 +1,0 @@
-######################################
-from MathSignal import MathSignal

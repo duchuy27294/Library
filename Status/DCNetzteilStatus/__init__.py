@@ -1,2 +1,0 @@
-#####################################################
-from DCNetzteilStatus.DCNetzteilStatus import *

@@ -1,4 +1,4 @@
-from Lib.Rezipient.Rezipient import Rezipient
+from ..Rezipient.Rezipient import Rezipient
 from abc import abstractmethod
 
 class ERA_Rezipient_Interface(Rezipient):
@@ -32,4 +32,8 @@ class ERA_Rezipient_Interface(Rezipient):
 
     @abstractmethod
     def removeNetzteil(self,netzteil):
+        pass
+
+    @abstractmethod
+    def update(self,observable):
         pass

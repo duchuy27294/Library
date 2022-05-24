@@ -1,0 +1,49 @@
+from ..Event import Event
+from .MathSignal import MathSignal
+from typing import List
+
+class CustomSignal(MathSignal):
+    def __init__(self,eventList = None):
+        if eventList is None:
+            self.__event = []
+        else:
+            self.__event = eventList
+
+    def setEventList(self,eventList):
+        self.__event = eventList
+
+    def count(self):
+        return len(self.__event)
+
+    def getEvent(self,index:int):
+        if index < len(self.__event):
+            return self.__event[index]
+
+    def addEvent(self,event:Event):
+        self.__event.append(event)
+
+    def getValue(self,time):
+        currentTime = 0
+        for event in self.__event:
+            currentTime += event.getDuration()
+            if time < currentTime:
+                return event.getValue()
+        return None
+
+    def getDuration(self):
+        duration = 0
+        for event in self.__event:
+            duration += event.getDuration()
+        return duration
+
+    def removeEvent(self):
+        self.__event.pop()
+
+    def generate(self)->List[Event]:
+        return self.__event.copy()
+
+    def isEmpty(self):
+        if len(self.__event) == 0:
+            return True
+        else:
+            return False

@@ -1,26 +1,22 @@
-from Lib.ERA_Rezipient.ERA_Rezipient_Interface import ERA_Rezipient_Interface
-from Lib.Netzteil.DummyNetzteil import DummyNetzteil
-from Lib.Netzteil.DummyNetzteil import Tdk
-from Lib.Netzteil.DummyNetzteil import Syskon
+try:
+    from .ERA_Rezipient_Interface import ERA_Rezipient_Interface
+except (ModuleNotFoundError,ImportError):
+    from ERA_Rezipient_Interface import ERA_Rezipient_Interface
+from ..Netzteil.DummyNetzteil import DummyNetzteil
+from ..Netzteil.DummyNetzteil import Tdk
+from ..Netzteil.DummyNetzteil import Syskon
 from typing import List
 import csv
 import os
 
 class Dummy_ERA_Rezipient(ERA_Rezipient_Interface):
-    # count:int = 0
-
     def __init__(self,name = 'Rezipient'):
         self.__name = name
         self.__netzteil:List[DummyNetzteil] = []
         self.__id:List[int] = []
         self.__path = os.getcwd() + '\\' + self.__name + '.csv'
-        # Dummy_ERA_Rezipient.count += 1
 
-    # @classmethod
-    # def getCount(cls):
-    #     return Dummy_ERA_Rezipient.count
-
-    def size(self):
+    def count(self):
         return len(self.__netzteil)
 
     def getName(self):
@@ -28,9 +24,6 @@ class Dummy_ERA_Rezipient(ERA_Rezipient_Interface):
 
     def setName(self,name):
         self.__name = name
-
-    def count(self):
-        return len(self.__netzteil)
 
     def getPath(self):
         return self.__path
@@ -72,14 +65,14 @@ class Dummy_ERA_Rezipient(ERA_Rezipient_Interface):
         if netzteil not in self.__netzteil:
             self.__netzteil.append(netzteil)
             self.__id.append(self.autoId())
-            #self.write()
+            self.write()
 
     def removeNetzteil(self,netzteil):
         if netzteil in self.__netzteil:
             index = self.__netzteil.index(netzteil)
             self.__netzteil.remove(netzteil)
             self.__id.pop(index)
-            #self.write()
+            self.write()
 
     def write(self):
         with open(self.__path,'w',newline = '') as data:
@@ -115,5 +108,16 @@ class Dummy_ERA_Rezipient(ERA_Rezipient_Interface):
                         netzteil = DummyNetzteil(name = name)
                     self.__netzteil.append(netzteil)
                     self.__id.append(id)
-                i+=1
             data.close()
+
+    def update(self,netzteil):
+        if (netzteil in self.__netzteil):
+            if ( (netzteil.get_voltage() - netzteil.measure_voltage()) >= 0.2 ):
+                print("Fehler: Spannungsabweichung zu gross")
+            elif (netzteil.measure_voltage() > netzteil.get_voltage()):
+                print("Fehler: Istspannung groesser als Sollspannung")
+            if ( (netzteil.get_current() - netzteil.measure_current()) >= 0.2 ):
+                print("Fehler: Stromabweichung zu gross")
+            elif (netzteil.measure_current() > netzteil.get_current()):
+                print("Fehler: Iststrom groesser als Sollstrom")
+
