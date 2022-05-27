@@ -3,7 +3,6 @@ try:
 except (ModuleNotFoundError,ImportError):
     from MathSignal import *
 from typing import List
-import numpy as np
 
 class SignalAlreadyExist(Exception):
     def __init__(self):
@@ -88,7 +87,7 @@ class SuperSignal(MathSignal):
                     constantSignal = ConstantSignal(duration = tempDuration,value = tempValue)
                     constantSignalList.append(constantSignal)
                     tempDuration = 0
-                    tempValue = y[i]
+                    tempValue =0
                 else:
                     tempDuration += 0.1
         return constantSignalList

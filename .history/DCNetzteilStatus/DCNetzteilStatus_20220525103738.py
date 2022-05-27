@@ -42,37 +42,37 @@ class DCNetzteilStatus(Status):
     def toString(self):
         pass
     
-# class Disconnected(DCNetzteilStatus):
-#     def __init__(self,netzteil):
-#         super().__init__(netzteil = netzteil)
+class Disconnected(DCNetzteilStatus):
+    def __init__(self,netzteil):
+        super().__init__(netzteil = netzteil)
 
-#     def turnOn(self):
-#         pass
+    def turnOn(self):
+        pass
 
-#     def turnOff(self):
-#         pass
+    def turnOff(self):
+        pass
 
-#     def connect(self):
-#         off = self._netzteil.getOff()
-#         self._netzteil.set_status(off)  #state changed
+    def connect(self):
+        off = self._netzteil.getOff()
+        self._netzteil.set_status(off)  #state changed
 
-#     def disconnect(self):
-#         pass
+    def disconnect(self):
+        pass
 
-#     def run(self):
-#         pass
+    def run(self):
+        pass
 
-#     def pause(self):
-#         pass
+    def pause(self):
+        pass
 
-#     def stop(self):
-#         pass     
+    def stop(self):
+        pass     
 
-#     def resume(self):
-#         pass
+    def resume(self):
+        pass
 
-#     def toString(self):
-#         return 'Disconnected'
+    def toString(self):
+        return 'Disconnected'
 
 class Off(DCNetzteilStatus):
     def __init__(self,netzteil):
@@ -85,12 +85,12 @@ class Off(DCNetzteilStatus):
     def turnOff(self):
         pass
 
-    # def connect(self):
-    #     pass
+    def connect(self):
+        pass
 
-    # def disconnect(self):
-    #     disconnected = self._netzteil.getDisconnected()
-    #     self._netzteil.set_status(disconnected)
+    def disconnect(self):
+        disconnected = self._netzteil.getDisconnected()
+        self._netzteil.set_status(disconnected)
 
     def run(self):
         self.turnOn()   #state changed
@@ -120,12 +120,12 @@ class On(DCNetzteilStatus):
         self._netzteil.clear()
         self._netzteil.set_status(off)  #state changed
 
-    # def connect(self):
-    #     pass
+    def connect(self):
+        pass
 
-    # def disconnect(self):
-    #     self.turnOff()  #state changed
-    #     self._netzteil.get_status().disconnect()
+    def disconnect(self):
+        self.turnOff()  #state changed
+        self._netzteil.get_status().disconnect()
 
     def run(self):
         working = self._netzteil.getWorking()
@@ -154,12 +154,12 @@ class Pause(DCNetzteilStatus):
         self.stop() #state changed
         self._netzteil.get_status().turnOff()  #state changed
 
-    # def connect(self):
-    #     pass
+    def connect(self):
+        pass
 
-    # def disconnect(self):
-    #     self.turnOff()  #state changed
-    #     self._netzteil.get_status().disconnect() #state changed
+    def disconnect(self):
+        self.turnOff()  #state changed
+        self._netzteil.get_status().disconnect() #state changed
 
     def run(self):
         pass
@@ -189,12 +189,12 @@ class Working(DCNetzteilStatus):
         self.stop() #state changed
         self._netzteil.get_status().turnOff()
 
-    # def connect(self):
-    #     pass
+    def connect(self):
+        pass
 
-    # def disconnect(self):
-    #     self.turnOff()  #state changed
-    #     self._netzteil.get_status().disconnect()
+    def disconnect(self):
+        self.turnOff()  #state changed
+        self._netzteil.get_status().disconnect()
 
     def run(self):
         pass

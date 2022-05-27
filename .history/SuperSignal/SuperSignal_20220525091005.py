@@ -3,7 +3,6 @@ try:
 except (ModuleNotFoundError,ImportError):
     from MathSignal import *
 from typing import List
-import numpy as np
 
 class SignalAlreadyExist(Exception):
     def __init__(self):

@@ -23,6 +23,7 @@ class DCNetzteilAutomation(Automation):
         self._constantSignal:List[ConstantSignal] = []
         self.__timer:List[ResumableTimer] = []
         self._currentIndex = 0
+        self._time = None
         #self.__start = 0
         #self.__save = None
 

@@ -30,23 +30,5 @@ class Builder(object):
 
     def generate(self):
         duration = self.__signal.getDuration()
-        t = np.arange(0,duration,0.1,dtype = float)
-        y = []
-        for i in t:
-            y.append(self.__signal.getValue(i))
-        constantSignalList = []
-        tempDuration = 0.0
-        tempValue = 0.0
-        for i in range (0,len(y),1):
-            if (i==0):
-                tempValue = y[i]
-                tempDuration = 0
-            else:
-                if (y[i] != y[i-1]):
-                    constantSignal = ConstantSignal(duration = tempDuration,value = tempValue)
-                    constantSignalList.append(constantSignal)
-                    tempDuration = 0
-                    tempValue = y[i]
-                else:
-                    tempDuration += 0.1
-        return constantSignalList
+        t = 
+

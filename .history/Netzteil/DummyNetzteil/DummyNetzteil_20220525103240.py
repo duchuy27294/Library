@@ -24,7 +24,7 @@ class DummyNetzteil(DCNetzteilInterface):
         self.__current:float = 0
         self.__on = On(self)
         self.__off = Off(self)
-        # self.__disconnected = Disconnected(self)
+        self.__disconnected = Disconnected(self)
         self.__working = Working(self)
         self.__pause = Pause(self) 
         self.__status = self.__off

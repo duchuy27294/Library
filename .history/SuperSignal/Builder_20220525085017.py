@@ -46,7 +46,7 @@ class Builder(object):
                     constantSignal = ConstantSignal(duration = tempDuration,value = tempValue)
                     constantSignalList.append(constantSignal)
                     tempDuration = 0
-                    tempValue = y[i]
+                    tempValue =0
                 else:
                     tempDuration += 0.1
         return constantSignalList

@@ -109,8 +109,8 @@ class DCNetzteil(DCNetzteilInterface):
     def getOff(self):
         return self.__off
 
-    # def getDisconnected(self):
-    #     return self.__disconnected
+    def getDisconnected(self):
+        return self.__disconnected
     
     def getWorking(self):
         return self.__working

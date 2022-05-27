@@ -24,7 +24,7 @@ class DummyNetzteil(DCNetzteilInterface):
         self.__current:float = 0
         self.__on = On(self)
         self.__off = Off(self)
-        # self.__disconnected = Disconnected(self)
+        self.__disconnected = Disconnected(self)
         self.__working = Working(self)
         self.__pause = Pause(self) 
         self.__status = self.__off
@@ -195,7 +195,6 @@ class DummyNetzteil(DCNetzteilInterface):
             self.__voltageAutomation.cancel()
             self.__currentAutomation.cancel()
             self.__endTimer.cancel()
-            self.__endTimer = None
         self.__status.turnOff()
 
     def connect(self):
@@ -219,7 +218,6 @@ class DummyNetzteil(DCNetzteilInterface):
             self.__voltageAutomation.cancel()
             self.__currentAutomation.cancel()
             self.__endTimer.cancel()
-            self.__endTimer = None
         self.__status.stop()
         
     def isOn(self):

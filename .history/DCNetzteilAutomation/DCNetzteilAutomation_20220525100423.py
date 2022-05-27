@@ -20,7 +20,7 @@ class DCNetzteilAutomation(Automation):
         self._netzteil = netzteil
         self._signal:SuperSignal = signal
         #self.__event:List[Event] = []
-        self._constantSignal:List[ConstantSignal] = []
+        self.__contantSignal:List[ConstantSignal] = []
         self.__timer:List[ResumableTimer] = []
         self._currentIndex = 0
         #self.__start = 0
@@ -32,11 +32,14 @@ class DCNetzteilAutomation(Automation):
     def setSignal(self,signal:SuperSignal):
         self._signal = signal
 
+    def getType(self):
+        return self.__type
+
     def generate(self):
-        if self._constantSignal:
-            self._constantSignal.clear()
+        if self.__constantSignal:
+            self.__constantSignal.clear()
         if self._signal is not None:
-            self._constantSignal = self._signal.generate()
+            self.__constantSignal = self._signal.generate()
 
     def getNetzteil(self):
         return self._netzteil
@@ -64,11 +67,11 @@ class DCNetzteilAutomation(Automation):
             self.generate()
             self._currentIndex = 0
             # if self.__event:
-            if self._constantSignal:
-                for i in range (0,len(self._constantSignal),1):
+            if self.__constantSignal:
+                for i in range (0,len(self.__constantSignal),1):
                     # newTimer = Timer(startTimer,self.do)
                     newTimer = ResumableTimer(startTimer,self.do)
-                    startTimer += self._constantSignal[i].getDuration()
+                    startTimer += self.__constantSignal[i].getDuration()
                     self.__timer.append(newTimer)
             # self.__start = time.time()
             if self.__timer:

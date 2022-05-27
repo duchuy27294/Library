@@ -23,6 +23,7 @@ class DCNetzteilAutomation(Automation):
         self._constantSignal:List[ConstantSignal] = []
         self.__timer:List[ResumableTimer] = []
         self._currentIndex = 0
+        self._time = None
         #self.__start = 0
         #self.__save = None
 
@@ -63,6 +64,7 @@ class DCNetzteilAutomation(Automation):
             startTimer = 0.1
             self.generate()
             self._currentIndex = 0
+            self._time = time.time()
             # if self.__event:
             if self._constantSignal:
                 for i in range (0,len(self._constantSignal),1):

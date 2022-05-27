@@ -61,13 +61,13 @@ class DCNetzteilInterface(Netzteil):
     def isOff(self):
         pass
 
-    # @abstractmethod
-    # def isDisconnected(self):
-    #     pass
+    @abstractmethod
+    def isDisconnected(self):
+        pass
 
-    # @abstractmethod
-    # def isConnected(self):
-    #     pass
+    @abstractmethod
+    def isConnected(self):
+        pass
 
     @abstractmethod
     def isWorking(self):
@@ -85,9 +85,9 @@ class DCNetzteilInterface(Netzteil):
     def getOff(self):
         pass
 
-    # @abstractmethod
-    # def getDisconnected(self):
-    #     pass
+    @abstractmethod
+    def getDisconnected(self):
+        pass
     
     @abstractmethod
     def getWorking(self):

@@ -32,6 +32,9 @@ class DCNetzteilAutomation(Automation):
     def setSignal(self,signal:SuperSignal):
         self._signal = signal
 
+    def getType(self):
+        return self.__type
+
     def generate(self):
         if self._constantSignal:
             self._constantSignal.clear()

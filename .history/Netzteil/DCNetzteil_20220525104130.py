@@ -91,11 +91,11 @@ class DCNetzteil(DCNetzteilInterface):
     def isOff(self):
         return (self.__status == self.__off)
 
-    # def isDisconnected(self):
-    #     return (self.__status == self.__disconnected)
+    def isDisconnected(self):
+        return (self.__status == self.__disconnected)
 
-    # def isConnected(self):
-    #     return (not (self.__status == self.__disconnected))
+    def isConnected(self):
+        return (not (self.__status == self.__disconnected))
 
     def isWorking(self):
         return (self.__status == self.__working)
@@ -109,8 +109,8 @@ class DCNetzteil(DCNetzteilInterface):
     def getOff(self):
         return self.__off
 
-    # def getDisconnected(self):
-    #     return self.__disconnected
+    def getDisconnected(self):
+        return self.__disconnected
     
     def getWorking(self):
         return self.__working
